@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { FaceSnapsService } from './../services/face-snaps.service';
 import { FaceSnap } from './../models/face-snap.model';
 import { Component, OnInit, Input } from '@angular/core';
@@ -12,16 +13,13 @@ export class FaceSnapComponent implements OnInit {
   @Input() faceSnap!: FaceSnap ;
   buttonTextIcone!: string;
 
-  constructor( private faceSnapsService : FaceSnapsService ) { }
+  constructor( private faceSnapsService : FaceSnapsService , private router: Router ) { }
 
   ngOnInit(): void {
 
     this.buttonTextIcone = "bi bi-hand-thumbs-up" ;
 
     }
-
-
-
 
   onSnap() {
     if (this.buttonTextIcone === "bi bi-hand-thumbs-up") {
@@ -32,5 +30,13 @@ export class FaceSnapComponent implements OnInit {
       this.buttonTextIcone = "bi bi-hand-thumbs-up";
     }
   }
+
+
+  AfficherUnFaceSnape(): void {
+
+    this.router.navigateByUrl(`facesnaps/${this.faceSnap.id}`);
+
+  }
+
 
 }
