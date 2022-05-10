@@ -4,7 +4,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'facesnaps', component: FaceSnapListComponent } 
+  { path: 'facesnaps/:id', component: SingleFaceSnapComponent },
+
+  { path: 'facesnaps', component: FaceSnapListComponent }
   ,
   { path: '' , component: HomePageComponent }
 
