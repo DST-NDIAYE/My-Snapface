@@ -21,12 +21,14 @@ export class FaceSnapComponent implements OnInit {
     }
 
 
+
+
   onSnap() {
     if (this.buttonTextIcone === "bi bi-hand-thumbs-up") {
-      this.faceSnapsService.snapFaceSnapById(this.faceSnap.id) ;
+      this.faceSnapsService.snapFaceSnapById(this.faceSnap.id , "snap") ;
       this.buttonTextIcone = "bi bi-hand-thumbs-down" ;
     } else {
-      this.faceSnap.snaps--;
+      this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'unsnap');
       this.buttonTextIcone = "bi bi-hand-thumbs-up";
     }
   }
