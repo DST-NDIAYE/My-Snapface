@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <form [formGroup]="snapForm">
+    <h2>NOUVEAU FACESNAP</h2>
+
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Titre"
+        formControlName="title"
+      />
+      <label for="floatingInput">Titre</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="imageUrl"
+        placeholder="URL de l'image"
+        formControlName="imageUrl"
+      />
+      <label for="floatingInput">URL de l'image</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        placeholder="Description"
+        formControlName="description"
+      />
+      <label for="floatingPassword">Description</label>
+    </div>
+
+
+
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="location"
+        placeholder="Lieu"
+        formControlName="location"
+      />
+      <label for="floatingPassword">Lieu</label>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="onSubmitForm()"
+      [disabled]="snapForm.invalid"
+    >
+      Enregistrer
+    </button>
+  </form>
+
+
+  <div class="face-snap-card" *ngIf="faceSnapPreview$ | async as faceSnap">
+    <h2>{{ faceSnap.title | uppercase }}</h2>
+    <p>
+      Mis en ligne {{ faceSnap.createdDate | date: "à HH:mm, le d MMMM yyyy" }}
+    </p>
+    <img [src]="faceSnap.imageUrl" [alt]="faceSnap.title" />
+    <p>{{ faceSnap.description }}</p>
+    <p *ngIf="faceSnap.location">Photo prise à {{ faceSnap.location }}</p>
+  </div>
+
+</div>

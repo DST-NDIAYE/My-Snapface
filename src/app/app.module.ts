@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -8,6 +9,7 @@ import { FaceSnapListComponent } from './face-snap-list/face-snap-list.component
 import { HeaderComponent } from './header/header.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SingleFaceSnapComponent } from './single-face-snap/single-face-snap.component';
+import { NewFaceSnapComponent } from './new-face-snap/new-face-snap.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,14 @@ import { SingleFaceSnapComponent } from './single-face-snap/single-face-snap.com
     FaceSnapListComponent,
     HeaderComponent,
     HomePageComponent,
-    SingleFaceSnapComponent
+    SingleFaceSnapComponent,
+    NewFaceSnapComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule ,
+    FormsModule ,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
