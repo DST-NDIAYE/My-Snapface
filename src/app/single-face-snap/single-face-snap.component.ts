@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FaceSnap } from './../models/face-snap.model';
 import { FaceSnapsService } from './../services/face-snaps.service';
@@ -12,6 +13,7 @@ export class SingleFaceSnapComponent implements OnInit {
 
   faceSnap!: FaceSnap ;
   buttonTextIcone!: string;
+  facesnap$!: Observable<FaceSnap>;
 
   constructor( private faceSnapsService : FaceSnapsService , private route :  ActivatedRoute ) { }
 
@@ -19,16 +21,16 @@ export class SingleFaceSnapComponent implements OnInit {
 
     this.buttonTextIcone = "bi bi-hand-thumbs-up" ;
     const snapId = +this.route.snapshot.params['id'];
-   this.faceSnap =  this.faceSnapsService.getFaceSnapById(snapId) ;
+   this.facesnap$ =  this.faceSnapsService.getFaceSnapById(snapId) ;
 
     }
 
-  onSnap() {
+  onSnap( faceSnapId: number ) {
     if (this.buttonTextIcone === "bi bi-hand-thumbs-up") {
-      this.faceSnapsService.snapFaceSnapById(this.faceSnap.id , "snap") ;
+      this.faceSnapsService.snapFaceSnapById(faceSnapId, "snap") ;
       this.buttonTextIcone = "bi bi-hand-thumbs-down" ;
     } else {
-      this.faceSnapsService.snapFaceSnapById(this.faceSnap.id, 'unsnap');
+      this.faceSnapsService.snapFaceSnapById(faceSnapId, 'unsnap');
       this.buttonTextIcone = "bi bi-hand-thumbs-up";
     }
   }

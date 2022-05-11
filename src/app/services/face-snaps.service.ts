@@ -1,3 +1,5 @@
+import { Observable, switchMap, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { FaceSnap } from './../models/face-snap.model';
 import { Injectable } from '@angular/core';
 
@@ -5,9 +7,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class FaceSnapsService {
-  constructor() {}
+  constructor( private http : HttpClient ) {}
 
-  faceSnaps: FaceSnap[] = [
+  faceSnaps: FaceSnap[] = [] ;
+
+
+  /**  faceSnaps: FaceSnap[] = [
     {
       id: 1,
       title: 'Archibald',
@@ -36,28 +41,37 @@ export class FaceSnapsService {
       createdDate: new Date(),
       snaps: 0,
     },
-  ];
+  ]; */
 
-  getAllFaceSnaps(): FaceSnap[] {
-    return this.faceSnaps;
-  }
-
-
-  getFaceSnapById(faceSnapId: number): FaceSnap {
-    const faceSnap = this.faceSnaps.find(faceSnap => faceSnap.id === faceSnapId);
-    if (!faceSnap) {
-        throw new Error('FaceSnap not found!');
-    } else {
-        return faceSnap;
-    }
-  }
-
-
-  snapFaceSnapById(faceSnapId: number, snapType: 'snap' | 'unsnap'): void { {
-    const faceSnap = this.getFaceSnapById(faceSnapId);
-    snapType === 'snap' ? faceSnap.snaps++ : faceSnap.snaps--;
+  getAllFaceSnaps(): Observable<FaceSnap[]> {
+    return this.http.get<FaceSnap[]>('http://localhost:3000/facesnaps');
 }
 
 
-  }
+getFaceSnapById(faceSnapId: number): Observable<FaceSnap> {
+  return this.http.get<FaceSnap>(`http://localhost:3000/facesnaps/${faceSnapId}`);
+}
+
+snapFaceSnapById(faceSnapId: number, snapType: 'snap' | 'unsnap'): Observable<FaceSnap> {
+  return this.getFaceSnapById(faceSnapId).pipe(
+      map(faceSnap => ({
+          ...faceSnap,
+          snaps: faceSnap.snaps + (snapType === 'snap' ? 1 : -1)
+      })),
+      switchMap(updatedFaceSnap => this.http.put<FaceSnap>(
+          `http://localhost:3000/facesnaps/${faceSnapId}`,
+          updatedFaceSnap)
+      )
+  );
+}
+
+  addFaceSnap(formValue: { title: string, description: string, imageUrl: string, location?: string }) {
+    const faceSnap: FaceSnap = {
+        ...formValue,
+        snaps: 0,
+        createdDate: new Date(),
+        id: this.faceSnaps[this.faceSnaps.length - 1].id + 1
+    };
+    this.faceSnaps.push(faceSnap);
+}
 }

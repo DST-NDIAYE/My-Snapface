@@ -21,7 +21,7 @@ export class FaceSnapComponent implements OnInit {
 
     }
 
-  onSnap() {
+    onSnap() {
     if (this.buttonTextIcone === "bi bi-hand-thumbs-up") {
       this.faceSnapsService.snapFaceSnapById(this.faceSnap.id , "snap") ;
       this.buttonTextIcone = "bi bi-hand-thumbs-down" ;
