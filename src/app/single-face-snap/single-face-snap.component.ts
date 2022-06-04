@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FaceSnap } from './../models/face-snap.model';
 import { FaceSnapsService } from './../services/face-snaps.service';
@@ -25,14 +25,23 @@ export class SingleFaceSnapComponent implements OnInit {
 
     }
 
-  onSnap( faceSnapId: number ) {
+
+
+  onSnap(faceSnapId: number) {
     if (this.buttonTextIcone === "bi bi-hand-thumbs-up") {
-      this.faceSnapsService.snapFaceSnapById(faceSnapId, "snap") ;
-      this.buttonTextIcone = "bi bi-hand-thumbs-down" ;
+        this.facesnap$ = this.faceSnapsService.snapFaceSnapById(faceSnapId, 'snap').pipe(
+            tap(() => this.buttonTextIcone = "bi bi-hand-thumbs-down")
+        );
     } else {
-      this.faceSnapsService.snapFaceSnapById(faceSnapId, 'unsnap');
-      this.buttonTextIcone = "bi bi-hand-thumbs-up";
+        this.facesnap$ = this.faceSnapsService.snapFaceSnapById(faceSnapId, 'unsnap').pipe(
+            tap(() => this.buttonTextIcone = "bi bi-hand-thumbs-up")
+        );
     }
-  }
+}
+
+
+
+
+
 
 }

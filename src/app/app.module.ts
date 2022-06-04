@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SingleFaceSnapComponent } from './single-face-snap/single-face-snap.component';
 import { NewFaceSnapComponent } from './new-face-snap/new-face-snap.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NewFaceSnapComponent } from './new-face-snap/new-face-snap.component';
     HeaderComponent,
     HomePageComponent,
     SingleFaceSnapComponent,
-    NewFaceSnapComponent
+    NewFaceSnapComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
