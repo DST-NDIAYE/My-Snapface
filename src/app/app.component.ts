@@ -8,20 +8,20 @@ import { interval, Observable, map, filter, tap } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  interval$!: Observable<string>;
+  // interval$!: Observable<string>;
 
   ngOnInit(): void {
-    this.interval$ = interval(1000).pipe(
-      filter((val) => val % 3 == 0),
-      map((valeur) => {
-        if (valeur % 2 == 0) {
-          return `Je suis ${valeur} et je suis pair`;
-        } else {
-          return '';
-        }
-      }) ,
-      tap( texte => this.AfficherCOnsol(texte)  )
-    );
+    // this.interval$ = interval(1000).pipe(
+    //   filter((val) => val % 3 == 0),
+    //   map((valeur) => {
+    //     if (valeur % 2 == 0) {
+    //       return `Je suis ${valeur} et je suis pair`;
+    //     } else {
+    //       return '';
+    //     }
+    //   }) ,
+    //   tap( texte => this.AfficherCOnsol(texte)  )
+    // );
 
   }
 

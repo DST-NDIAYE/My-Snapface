@@ -1,3 +1,4 @@
+import { httpInterceptorProviders } from './interceptors/index';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -31,7 +32,7 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule ,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ httpInterceptorProviders ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
