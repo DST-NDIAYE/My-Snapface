@@ -1,4 +1,4 @@
-import { FaceSnap } from './models/face-snap.model';
+import { FaceSnap } from './core/models/face-snap.model';
 import { Component, OnInit } from '@angular/core';
 import { interval, Observable, map, filter, tap } from 'rxjs';
 
